@@ -1,0 +1,5 @@
+repository\SolrOrderRepository.class
+solr\Order.class
+hello\HelloController.class
+hello\OrderController.class
+hello\Application.class
