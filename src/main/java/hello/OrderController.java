@@ -1,6 +1,8 @@
 package hello;
 
 
+import lombok.extern.log4j.Log4j2;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
@@ -10,15 +12,20 @@ import solr.Order;
 import java.util.List;
 
 @RestController
+@Log4j2
 public class OrderController {
 
     @Autowired
     SolrOrderRepository solrOrderRepository;
 
+    @Autowired
+    Logger logger;
+
     @PostMapping("/order")
     public String createOrder(@RequestBody Order order) {
         String description = "Order Created";
         solrOrderRepository.save(order);
+        logger.info("Order saved to db");
         return description;
     }
 
@@ -38,6 +45,7 @@ public class OrderController {
     public String deleteOrder(@PathVariable Long orderid) {
         String description = "Order Deleted";
         solrOrderRepository.delete(solrOrderRepository.findByOrderid(orderid));
+        logger.info("Order deleted");
         return description;
     }
 
