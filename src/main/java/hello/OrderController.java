@@ -38,6 +38,7 @@ public class OrderController {
     public String updateOrder(@RequestBody Order order) {
         String description = "Order Updated";
         solrOrderRepository.save(order);
+        logger.info("Order updated to db");
         return description;
     }
 
